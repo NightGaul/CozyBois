@@ -17,6 +17,8 @@ public class DandelionController : MonoBehaviour
     void Start()
     {
         ps = GetComponent<ParticleSystem>();
+        //ps.Pause();
+                
     }
 
     // Update is called once per frame
@@ -44,7 +46,7 @@ public class DandelionController : MonoBehaviour
             ball.transform.position = new Vector3(ball.transform.position.x, ps.trigger.GetCollider(i).transform.position.y,ball.transform.position.z);
             //ball.transform.position =+ new Vector3(0,0.33f,0);
             
-            Debug.Log(p.position);
+            //Debug.Log(p.position);
             ball.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
                 
             _enter[i] = p;
