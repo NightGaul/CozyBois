@@ -14,6 +14,7 @@ public class DandelionController : MonoBehaviour
     // the trigger conditions each frame.
     List<ParticleSystem.Particle> _enter = new List<ParticleSystem.Particle>();
 
+    private Quaternion _playerRotation;
     void Start()
     {
         ps = GetComponent<ParticleSystem>();
@@ -22,10 +23,20 @@ public class DandelionController : MonoBehaviour
                 
     }
 
-    public void Blow()
+    private Vector3 PointRotation(Vector3 P1, Vector3 P2, Quaternion rot)
+    {
+        var v = P1 - P2; //the relative vector from P2 to P1.
+        v = rot * v; //rotatate
+        v = P2 + v; //bring back to world space
+
+        return v;
+    }
+    public void Blow(Quaternion rotationPlayer)
     {
         ps.Play();
         Debug.Log("i'm being blown");
+        _playerRotation = rotationPlayer;
+        GetComponentsInParent<Transform>()[1].rotation = rotationPlayer;
     }
 
     // Update is called once per frame
@@ -50,7 +61,7 @@ public class DandelionController : MonoBehaviour
             //ball.transform.SetParent(ps.trigger.GetCollider(i).transform); 
             Debug.Log("Ballpos: " + ball.transform.position);
             
-            ball.transform.position = gameObject.transform.position + p.position;
+            ball.transform.position = PointRotation(gameObject.transform.position + p.position,gameObject.transform.position,_playerRotation);
             Debug.Log("Ballpos 2: " + ball.transform.position);
             ball.transform.position = new Vector3(ball.transform.position.x, ps.trigger.GetCollider(i).transform.position.y,ball.transform.position.z);
             

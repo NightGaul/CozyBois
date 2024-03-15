@@ -69,20 +69,20 @@ public class InteractionController : MonoBehaviour
     private void OnInteract()
     {
         
-            
+            try{
                 if (_current.transform.gameObject.layer == 7)
                 {
                     //Debug.Log("im cool");
-                    _current.transform.gameObject.GetComponentInChildren<DandelionController>().Blow();
+                    _current.transform.gameObject.GetComponentInChildren<DandelionController>().Blow(gameObject.transform.rotation);
                    
 
                 }
 
-            // }
-            // catch 
-            // {
-            //     //i shouldnt do this but fuck this
-            // }
+            }
+            catch 
+            {
+                //i shouldnt do this but fuck this
+            }
         
     }
 
