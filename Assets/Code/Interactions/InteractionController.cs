@@ -4,12 +4,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+
+using Image = UnityEngine.UI.Image;
+
+
 public class InteractionController : MonoBehaviour
 {
     private readonly List<Collider> _interactableObjects = new List<Collider>();
 
-    [SerializeField] private Material _material;
-    [SerializeField] private Material _default;
+    [SerializeField] private Sprite _interactUI;
+    [SerializeField] private Sprite _default;
+    
+    [SerializeField] private Image _image;
+    
+    
     [SerializeField] private Camera _main;
     private RaycastHit _current;
 
@@ -31,7 +39,8 @@ public class InteractionController : MonoBehaviour
                 {
                     try
                     {
-                        _current.transform.gameObject.GetComponent<MeshRenderer>().material = _default;
+                        _image.sprite = _default;
+                        //_current.transform.gameObject.GetComponent<MeshRenderer>().material = _default;
 
                     }
                     catch
@@ -43,7 +52,9 @@ public class InteractionController : MonoBehaviour
                     if (hit.transform.gameObject.layer == 7)
                     {
                         _current = hit;
-                        hit.transform.gameObject.GetComponent<MeshRenderer>().material = _material;
+                        _image.sprite = _interactUI;
+                        //hit.transform.gameObject.GetComponent<MeshRenderer>().material = _interactUI;
+                        
                     }
                     else
                     {
@@ -58,55 +69,21 @@ public class InteractionController : MonoBehaviour
     private void OnInteract()
     {
         
-            try
-            {
+            
                 if (_current.transform.gameObject.layer == 7)
                 {
-                    Debug.Log("im cool");
+                    //Debug.Log("im cool");
+                    _current.transform.gameObject.GetComponentInChildren<DandelionController>().Blow();
+                   
+
                 }
 
-            }
-            catch 
-            {
-                //i shouldnt do this but fuck this
-            }
+            // }
+            // catch 
+            // {
+            //     //i shouldnt do this but fuck this
+            // }
         
     }
 
-
-    // void OnTriggerEnter(Collider other)
-    // {
-    //     _interactableObjects.Add(other);
-    // }
-    //
-    // private void OnTriggerExit(Collider other)
-    // {
-    //     _interactableObjects.Remove(other);
-    // }
-
-
-    // private void OnInteract()
-    // {
-    //     if (_interactableObjects.Count <= 0) return;
-    //
-    //
-    //     //placeHolder Action to show interact works
-    //     //ClosestObjectFromArray(_interactableObjects).gameObject.GetComponent<MeshRenderer>().material = _material;
-    // }
-
-    
-    // private Collider ClosestObjectFromArray(List<Collider> list)
-    // {
-    //     Collider closest = list[0];
-    //     foreach (var collider in list)
-    //     {
-    //         if (Vector3.Distance(transform.position, collider.gameObject.transform.position) <
-    //             Vector3.Distance(transform.position, closest.gameObject.transform.position))
-    //         {
-    //             closest = collider;
-    //         }
-    //     }
-    //
-    //     return closest;
-    // }
 }

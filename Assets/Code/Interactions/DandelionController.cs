@@ -17,8 +17,15 @@ public class DandelionController : MonoBehaviour
     void Start()
     {
         ps = GetComponent<ParticleSystem>();
-        //ps.Pause();
+        
+        
                 
+    }
+
+    public void Blow()
+    {
+        ps.Play();
+        Debug.Log("i'm being blown");
     }
 
     // Update is called once per frame
@@ -40,13 +47,15 @@ public class DandelionController : MonoBehaviour
             p.startColor = new Color32(255, 0, 0, 255);
             GameObject ball = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             
-            ball.transform.SetParent(ps.trigger.GetCollider(i).transform); 
-
-            ball.transform.position = p.position;
-            ball.transform.position = new Vector3(ball.transform.position.x, ps.trigger.GetCollider(i).transform.position.y,ball.transform.position.z);
-            //ball.transform.position =+ new Vector3(0,0.33f,0);
+            //ball.transform.SetParent(ps.trigger.GetCollider(i).transform); 
+            Debug.Log("Ballpos: " + ball.transform.position);
             
-            //Debug.Log(p.position);
+            ball.transform.position = gameObject.transform.position + p.position;
+            Debug.Log("Ballpos 2: " + ball.transform.position);
+            ball.transform.position = new Vector3(ball.transform.position.x, ps.trigger.GetCollider(i).transform.position.y,ball.transform.position.z);
+            
+            
+            Debug.Log(p.position);
             ball.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
                 
             _enter[i] = p;
