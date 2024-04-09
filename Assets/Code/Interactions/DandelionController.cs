@@ -107,7 +107,7 @@ public class DandelionController : MonoBehaviour
         // Debug.Log((hit.collider.transform.position));
         // position = hit.collider.transform.position;
         //Debug.Log("SpawnNew");
-        var temp = Instantiate(_dandelionPrefab, new Vector3(position.x, transform.position.y- 0.5f, position.z), Quaternion.identity);
+        var temp = Instantiate(_dandelionPrefab, new Vector3(position.x, transform.position.y- 2f, position.z), Quaternion.identity);
         temp.GetComponentInChildren<ParticleSystem>().collision.SetPlane(0, GameObject.Find("Terrain").transform);
         temp.GetComponentInChildren<ParticleSystem>().collision.SetPlane(0, GameObject.Find("Terrain_(0.00, 0.00, 1000.00)").transform);
         temp.GetComponentInChildren<ParticleSystem>().collision.SetPlane(0, GameObject.Find("Terrain_(1000.00, 0.00, 0.00)").transform);
