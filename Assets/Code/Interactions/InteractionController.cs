@@ -56,7 +56,7 @@ public class InteractionController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.E)) OnInteract();
+        //if (Input.GetKeyDown(KeyCode.E)) OnInteract();
 
         // _main.fieldOfView += (Input.GetAxis("Mouse ScrollWheel") * -5 );
         if (Input.GetAxis("Mouse ScrollWheel") <= 0)
@@ -70,6 +70,7 @@ public class InteractionController : MonoBehaviour
         else
         {
             if (_mouseValue > 0.1) Release(_mouseValue);
+            
             _mouseValue = 0;
             if (_main.fieldOfView > 60f)
             {
@@ -80,10 +81,17 @@ public class InteractionController : MonoBehaviour
 
     private void Release(float speed)
     {
-        if (_current.transform.gameObject.layer == 7)
+        try
         {
-            _current.transform.gameObject.GetComponentInChildren<DandelionController>()
-                .Blow(gameObject.transform.rotation, speed);
+            if (_current.transform.gameObject.layer == 7)
+            {
+                _current.transform.gameObject.GetComponentInChildren<DandelionController>()
+                    .Blow(gameObject.transform.rotation, speed);
+            }
+        }
+        catch
+        {
+            //lol what you gonna do about this
         }
     }
 
