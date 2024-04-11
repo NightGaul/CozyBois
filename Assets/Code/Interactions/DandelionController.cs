@@ -2,7 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Code.Helpers;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
+using Object = System.Object;
+using Random = UnityEngine.Random;
 
 public class DandelionController : MonoBehaviour
 {
@@ -12,6 +16,7 @@ public class DandelionController : MonoBehaviour
 
     private readonly int _numParticles = 64;
     private Quaternion _playerRotation;
+    [SerializeField] private GameObject _dandelionPrefab;
 
     void Start()
     {
@@ -20,8 +25,7 @@ public class DandelionController : MonoBehaviour
 
         _emitParams = new ParticleSystem.EmitParams();
         _ps = GetComponent<ParticleSystem>();
-
-
+        
         for (int i = 0; i < _numParticles; i++)
         {
             // Set the position of the emitted particle
@@ -30,6 +34,8 @@ public class DandelionController : MonoBehaviour
             _emitParams.rotation3D = VectorModifiers.CalculateRotation(particlePosition, Vector3.zero).eulerAngles * -1;
             _ps.Emit(_emitParams, 1);
         }
+
+        Physics.queriesHitBackfaces = true;
     }
 
 
@@ -37,51 +43,81 @@ public class DandelionController : MonoBehaviour
     {
         // get the particles which matched the trigger conditions this frame
         if (_ps == null) return;
-        
-        int numEnter = _ps.GetTriggerParticles(ParticleSystemTriggerEventType.Enter, _enter);
 
+        int numEnter = _ps.GetTriggerParticles(ParticleSystemTriggerEventType.Enter, _enter);
 
         // iterate through the particles which entered the trigger
         for (int i = 0; i < numEnter; i++)
         {
             ParticleSystem.Particle p = _enter[i];
-            p.startColor = new Color32(255, 0, 0, 255);
-            GameObject ball = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            //p.startColor = new Color32(255, 0, 0, 255);
+            //GameObject ball = GameObject.CreatePrimitive(PrimitiveType.Sphere);
 
 
             Vector3 position;
             var position1 = gameObject.transform.position;
+            
             position = VectorModifiers.PointRotation(position1 + p.position, position1, _playerRotation);
-            Debug.Log(_ps.trigger.GetCollider(i));
+            //Debug.Log(_ps.trigger.GetCollider(i));
+            
             try
             {
                 position = new Vector3(position.x, _ps.trigger.GetCollider(i).transform.position.y, position.z);
             }
             catch
             {
-                Debug.Log("oh no");
+                /*this bitch empty*/
             }
 
-            ball.transform.position = position;
-            ball.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-
+            //position tells us the position of the dandelion seed
+            var temp = Random.Range(0, 10);
+            if (temp < 4) SpawnNewDandelion(position);
+            
             _enter[i] = p;
         }
-
+        
         _ps.SetTriggerParticles(ParticleSystemTriggerEventType.Enter, _enter);
     }
 
-    public void  Blow(Quaternion rotationPlayer, float speed)
+    public void Blow(Quaternion rotationPlayer, float speed)
     {
-        Debug.Log("i'm being blown");
-
-        float _speed = speed/50;
-        if (_speed < 1) _speed = 1;
+        float _speed = speed / 40;
+        if (_speed < 0.5) _speed = 0.5f;
         var velocityOverLifetimeModule = _ps.velocityOverLifetime;
         _playerRotation = rotationPlayer;
-        velocityOverLifetimeModule.speedModifier = new ParticleSystem.MinMaxCurve(_speed-0.8f, _speed+0.8f);
-        GetComponentsInParent<Transform>()[1].rotation = rotationPlayer;
+        velocityOverLifetimeModule.speedModifier = new ParticleSystem.MinMaxCurve(_speed - 0.8f, _speed + 0.8f);
+        transform.rotation = rotationPlayer;
         
+    }
+
+    private void SpawnNewDandelion(Vector3 position)
+    {
+        position = new Vector3(position.x, -40000, position.z);
+        Physics.Raycast(position, Vector3.up, out var hit,float.PositiveInfinity);
+        Debug.Log(hit.point);
         
+        var temp = Instantiate(_dandelionPrefab, hit.point + new Vector3(0,0.5f,0), Quaternion.identity); //
+        temp.GetComponentInChildren<ParticleSystem>().collision.SetPlane(0, GameObject.Find("Terrain").transform);
+        temp.GetComponentInChildren<ParticleSystem>().collision
+            .SetPlane(0, GameObject.Find("Terrain_(0.00, 0.00, 1000.00)").transform);
+        temp.GetComponentInChildren<ParticleSystem>().collision
+            .SetPlane(0, GameObject.Find("Terrain_(1000.00, 0.00, 0.00)").transform);
+        var velocityOverLifetimeModule = temp.GetComponentInChildren<ParticleSystem>().velocityOverLifetime;
+        velocityOverLifetimeModule.speedModifier = new ParticleSystem.MinMaxCurve(0, 0);
+        // temp.GetComponentInChildren<ParticleSystem>().trigger
+        //     .SetCollider(0, GameObject.Find("Terrain").transform);
+        // temp.GetComponentInChildren<ParticleSystem>().trigger
+        //     .SetCollider(0, GameObject.Find("Terrain_(0.00, 0.00, 1000.00)").transform);
+        // temp.GetComponentInChildren<ParticleSystem>().trigger
+        //     .SetCollider(0, GameObject.Find("Terrain_(1000.00, 0.00, 0.00)").transform);
+        temp.GetComponentInChildren<DandelionController>()._dandelionPrefab = _dandelionPrefab;
+    }
+
+    IEnumerator WaitDandelion()
+    {
+        //size seeds down
+        yield return new WaitForSeconds(40f);
+        Debug.Log("self destroy");
+        GameObject.Destroy(gameObject);
     }
 }
