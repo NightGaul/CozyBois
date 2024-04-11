@@ -34,6 +34,8 @@ public class DandelionController : MonoBehaviour
             _emitParams.rotation3D = VectorModifiers.CalculateRotation(particlePosition, Vector3.zero).eulerAngles * -1;
             _ps.Emit(_emitParams, 1);
         }
+
+        Physics.queriesHitBackfaces = true;
     }
 
 
@@ -85,14 +87,16 @@ public class DandelionController : MonoBehaviour
         _playerRotation = rotationPlayer;
         velocityOverLifetimeModule.speedModifier = new ParticleSystem.MinMaxCurve(_speed - 0.8f, _speed + 0.8f);
         transform.rotation = rotationPlayer;
-        //var mainModule = _ps.main;
-        //mainModule.startLifetime = 15;
-        //StartCoroutine(WaitDandelion());
+        
     }
 
     private void SpawnNewDandelion(Vector3 position)
     {
-        var temp = Instantiate(_dandelionPrefab, new Vector3(position.x, transform.position.y - 2f, position.z), Quaternion.identity); //
+        position = new Vector3(position.x, -40000, position.z);
+        Physics.Raycast(position, Vector3.up, out var hit,float.PositiveInfinity);
+        Debug.Log(hit.point);
+        
+        var temp = Instantiate(_dandelionPrefab, hit.point + new Vector3(0,0.5f,0), Quaternion.identity); //
         temp.GetComponentInChildren<ParticleSystem>().collision.SetPlane(0, GameObject.Find("Terrain").transform);
         temp.GetComponentInChildren<ParticleSystem>().collision
             .SetPlane(0, GameObject.Find("Terrain_(0.00, 0.00, 1000.00)").transform);
