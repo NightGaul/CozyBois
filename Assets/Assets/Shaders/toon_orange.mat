@@ -23,7 +23,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: toonShading 5
+  m_Name: toon_orange
   m_Shader: {fileID: -6465566751694194690, guid: a7554ffd262fd72428e38b18fd08f20a, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
