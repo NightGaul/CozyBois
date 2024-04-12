@@ -85,8 +85,12 @@ public class InteractionController : MonoBehaviour
         {
             if (_current.transform.gameObject.layer == 7)
             {
-                _current.transform.gameObject.GetComponentInChildren<DandelionController>()
-                    .Blow(gameObject.transform.rotation, speed);
+                FlowerController[] temp = _current.transform.gameObject.GetComponentsInChildren<FlowerController>();
+                foreach (var FlowerCont in temp)
+                {
+                    FlowerCont.Blow(gameObject.transform.rotation, speed);
+                    
+                }
             }
         }
         catch
@@ -101,7 +105,7 @@ public class InteractionController : MonoBehaviour
         {
             if (_current.transform.gameObject.layer == 7)
             {
-                _current.transform.gameObject.GetComponentInChildren<DandelionController>()
+                _current.transform.gameObject.GetComponentInChildren<FlowerController>()
                     .Blow(gameObject.transform.rotation, 0.13f);
             }
         }
