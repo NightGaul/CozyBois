@@ -22,7 +22,7 @@ public class SunflowerPlacement : MonoBehaviour, IPedalPlacement
             // Set the position of the emitted particle
             Vector3 particlePosition = new Vector3(x, y, -0.5f) * scaling;
 
-            ;
+            
             emitParams.rotation3D = new Vector3(emitParams.rotation3D.x, emitParams.rotation3D.y, 45 * i + 90);
 
             ps.Emit(emitParams, 1);
