@@ -57,10 +57,10 @@ public class FlowerController : MonoBehaviour
 
             position = VectorModifiers.PointRotation(position1 + p.position, position1, _playerRotation);
             
-
+            //_ps.trigger.GetCollider(i).transform.position
             try
             {
-                position = new Vector3(position.x, _ps.trigger.GetCollider(i).transform.position.y, position.z);
+                position = new Vector3(position.x, p.position.y, position.z);
             }
             catch
             {
@@ -87,13 +87,16 @@ public class FlowerController : MonoBehaviour
         transform.rotation = rotationPlayer;
     }
 
-    private void SpawnNewPlant(Vector3 position)
+    private void SpawnNewPlant(Vector3 pos2)
     {
-        position = new Vector3(position.x, -40000, position.z);
-        Physics.Raycast(position, Vector3.up, out var hit, float.PositiveInfinity);
-        Debug.Log(hit.point);
+        Debug.Log("pos" + pos2);
+        var pos = new Vector3(pos2.x, pos2.y+100, pos2.z);
+        Physics.Raycast(pos, Vector3.up, out var hit, float.PositiveInfinity);
+        Debug.DrawRay(pos,Vector3.up *10000 ,Color.magenta,10000000f);
+        Debug.Log(hit.collider);
+        Debug.Log("Hit" + hit.point);
 
-        var temp = Instantiate(_flowerPrefab, hit.point + new Vector3(0, 0.5f, 0), Quaternion.identity); //
+        var temp = Instantiate(_flowerPrefab, hit.point + new Vector3(0, 0.5f, 0), Quaternion.identity);
         temp.GetComponentInChildren<ParticleSystem>().collision.SetPlane(0, GameObject.Find("Terrain").transform);
         temp.GetComponentInChildren<ParticleSystem>().collision
             .SetPlane(0, GameObject.Find("Terrain_(0.00, 0.00, 1000.00)").transform);
