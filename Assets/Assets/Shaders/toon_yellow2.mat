@@ -79,7 +79,7 @@ Material:
     - _EnableBlendModePreserveSpecularLighting: 0
     - _EnableFogOnTransparent: 1
     - _ExcludeFromTUAndAA: 0
-    - _Max: 1.6
+    - _Max: 1
     - _Min: 0.4
     - _OpaqueCullMode: 2
     - _RenderQueueType: 1

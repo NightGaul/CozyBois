@@ -79,7 +79,7 @@ Material:
     - _EnableBlendModePreserveSpecularLighting: 0
     - _EnableFogOnTransparent: 1
     - _ExcludeFromTUAndAA: 0
-    - _Max: 1.6
+    - _Max: 1
     - _Min: 0.4
     - _OpaqueCullMode: 2
     - _RenderQueueType: 1
@@ -106,7 +106,7 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.3962264, g: 0.37698677, b: 0.33081168, a: 0}
+    - _Color: {r: 0.6037736, g: 0.56272906, b: 0.46422216, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
