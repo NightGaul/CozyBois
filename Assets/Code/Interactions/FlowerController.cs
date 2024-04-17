@@ -21,6 +21,12 @@ public class FlowerController : MonoBehaviour
 
     void Start()
     {
+        GetComponentInChildren<ParticleSystem>().trigger.AddCollider(GameObject.Find("Terrain").transform);
+        GetComponentInChildren<ParticleSystem>().trigger.AddCollider(GameObject.Find("Terrain_(0.00, 0.00, 1000.00)").transform);
+        GetComponentInChildren<ParticleSystem>().trigger.AddCollider(GameObject.Find("Terrain_(1000.00, 0.00, 0.00)").transform);
+        GetComponentInChildren<ParticleSystem>().trigger.AddCollider(GameObject.Find("CollisionPlane").transform);
+        GetComponentInChildren<FlowerController>()._flowerPrefab = _flowerPrefab;
+        
         _emitParams = new ParticleSystem.EmitParams();
         _ps = GetComponent<ParticleSystem>();
         try
@@ -97,14 +103,16 @@ public class FlowerController : MonoBehaviour
         Debug.Log("Hit" + hit.point);
 
         var temp = Instantiate(_flowerPrefab, hit.point + new Vector3(0, 0.5f, 0), Quaternion.identity);
-        temp.GetComponentInChildren<ParticleSystem>().collision.SetPlane(0, GameObject.Find("Terrain").transform);
-        temp.GetComponentInChildren<ParticleSystem>().collision
-            .SetPlane(0, GameObject.Find("Terrain_(0.00, 0.00, 1000.00)").transform);
-        temp.GetComponentInChildren<ParticleSystem>().collision
-            .SetPlane(0, GameObject.Find("Terrain_(1000.00, 0.00, 0.00)").transform);
+        // temp.GetComponentInChildren<ParticleSystem>().collision.SetPlane(0, GameObject.Find("Terrain").transform);
+        // temp.GetComponentInChildren<ParticleSystem>().collision
+        //     .SetPlane(0, GameObject.Find("Terrain_(0.00, 0.00, 1000.00)").transform);
+        // temp.GetComponentInChildren<ParticleSystem>().collision
+        //     .SetPlane(0, GameObject.Find("Terrain_(1000.00, 0.00, 0.00)").transform);
+        // temp.GetComponentInChildren<ParticleSystem>().collision.SetPlane(0, GameObject.Find("CollisionPlane").transform);
+        // temp.GetComponentInChildren<FlowerController>()._flowerPrefab = _flowerPrefab;
+        
         var velocityOverLifetimeModule = temp.GetComponentInChildren<ParticleSystem>().velocityOverLifetime;
         velocityOverLifetimeModule.speedModifier = new ParticleSystem.MinMaxCurve(0, 0);
-        temp.GetComponentInChildren<FlowerController>()._flowerPrefab = _flowerPrefab;
     }
 
     IEnumerator WaitDandelion()

@@ -3811,10 +3811,7 @@ ParticleSystem:
     exit: 0
     colliderQueryMode: 2
     radiusScale: 0.1
-    primitives:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
+    primitives: []
   SubModule:
     serializedVersion: 2
     enabled: 0
@@ -8672,10 +8669,7 @@ ParticleSystem:
     exit: 0
     colliderQueryMode: 2
     radiusScale: 0.1
-    primitives:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
+    primitives: []
   SubModule:
     serializedVersion: 2
     enabled: 0
@@ -14184,10 +14178,7 @@ ParticleSystem:
     exit: 0
     colliderQueryMode: 2
     radiusScale: 0.1
-    primitives:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
+    primitives: []
   SubModule:
     serializedVersion: 2
     enabled: 0
