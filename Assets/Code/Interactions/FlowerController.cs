@@ -78,7 +78,7 @@ public class FlowerController : MonoBehaviour
 
             //position tells us the position of the dandelion seed
             var temp = Random.Range(0, 10);
-            if (temp < 4) SpawnNewPlant(position);
+            if (temp < 3) SpawnNewPlant(position);
 
             _enter[i] = p;
         }
