@@ -80,10 +80,10 @@ Material:
     - _EnableFogOnTransparent: 1
     - _ExcludeFromTUAndAA: 0
     - _Max: 1
-    - _Min: 0.4
+    - _Min: 0.1
     - _OpaqueCullMode: 2
     - _RenderQueueType: 1
-    - _Shades: 0.49
+    - _Shades: 0.1
     - _SrcBlend: 1
     - _StencilRef: 0
     - _StencilRefDepth: 1

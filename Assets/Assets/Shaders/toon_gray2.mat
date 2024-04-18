@@ -80,10 +80,10 @@ Material:
     - _EnableFogOnTransparent: 1
     - _ExcludeFromTUAndAA: 0
     - _Max: 1
-    - _Min: 0.4
+    - _Min: 0.1
     - _OpaqueCullMode: 2
     - _RenderQueueType: 1
-    - _Shades: 0.49
+    - _Shades: 0.1
     - _SrcBlend: 1
     - _StencilRef: 0
     - _StencilRefDepth: 1
@@ -106,7 +106,7 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.6037736, g: 0.56272906, b: 0.46422216, a: 0}
+    - _Color: {r: 0.5754717, g: 0.54561234, b: 0.4750356, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

@@ -9,7 +9,7 @@ TerrainLayer:
   m_Name: Pebbles_B_TerrainLayer
   m_DiffuseTexture: {fileID: 2800000, guid: ed4ab53f82cc77c4a8388862d03dfad6, type: 3}
   m_NormalMapTexture: {fileID: 0}
-  m_MaskMapTexture: {fileID: 2800000, guid: 5c4a8c65594fb714388c177bbed315bc, type: 3}
+  m_MaskMapTexture: {fileID: 2800000, guid: 5d46f74cdeedd7941ba8cd7cb7ebb40c, type: 3}
   m_TileSize: {x: 10, y: 10}
   m_TileOffset: {x: 0, y: 0}
   m_Specular: {r: 0, g: 0, b: 0, a: 0}
