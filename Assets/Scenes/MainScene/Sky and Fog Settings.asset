@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-4763050242663114154
+--- !u!114 &-573836625388838758
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -50,7 +50,7 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 400
   enableVolumetricFog:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1
   albedo:
     m_OverrideState: 0
@@ -98,13 +98,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d7fd9488000d3734a9e00ee676215985, type: 3}
-  m_Name: Sky and Fog Settings 1
+  m_Name: Sky and Fog Settings
   m_EditorClassIdentifier: 
   components:
-  - {fileID: 1638292364618240058}
-  - {fileID: -4763050242663114154}
-  - {fileID: 2221396462172779178}
---- !u!114 &1638292364618240058
+  - {fileID: 1553825008483634839}
+  - {fileID: -573836625388838758}
+  - {fileID: 2218274277005297431}
+--- !u!114 &1553825008483634839
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -119,7 +119,7 @@ MonoBehaviour:
   active: 1
   skyType:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 4
   cloudType:
     m_OverrideState: 1
     m_Value: 0
@@ -135,7 +135,7 @@ MonoBehaviour:
   fogType:
     m_OverrideState: 1
     m_Value: 0
---- !u!114 &2221396462172779178
+--- !u!114 &2218274277005297431
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -152,20 +152,20 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 0
   skyIntensityMode:
-    m_OverrideState: 1
-    m_Value: 2
+    m_OverrideState: 0
+    m_Value: 0
   exposure:
     m_OverrideState: 0
     m_Value: 0
   multiplier:
-    m_OverrideState: 1
-    m_Value: 1.2
+    m_OverrideState: 0
+    m_Value: 1
   upperHemisphereLuxValue:
-    m_OverrideState: 1
-    m_Value: 0.8299572
+    m_OverrideState: 0
+    m_Value: 1
   upperHemisphereLuxColor:
-    m_OverrideState: 1
-    m_Value: {x: 0.091654256, y: 0.25308803, z: 0.5}
+    m_OverrideState: 0
+    m_Value: {x: 0, y: 0, z: 0}
   desiredLuxValue:
     m_OverrideState: 0
     m_Value: 20000
@@ -179,8 +179,8 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 0
   hdriSky:
-    m_OverrideState: 1
-    m_Value: {fileID: 8900000, guid: 6b057cc84b9df8440b171f96ff306279, type: 3}
+    m_OverrideState: 0
+    m_Value: {fileID: 0}
   distortionMode:
     m_OverrideState: 0
     m_Value: 0
