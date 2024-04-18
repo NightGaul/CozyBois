@@ -34,7 +34,7 @@ public class FPSController : MonoBehaviour
  
     void Update()
     {
-        canMove = _pauseMenu.activeSelf ? false : true;
+        //canMove = !_pauseMenu.activeSelf;
         
         #region Handles Movment
         Vector3 forward = transform.TransformDirection(Vector3.forward);

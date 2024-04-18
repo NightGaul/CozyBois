@@ -24,15 +24,18 @@ public class InteractionController : MonoBehaviour
     [SerializeField] private AudioSource _twinkleAudio;
     private Boolean _soundPlayed = false;
 
+    private void Awake()
+    {
+        _pauseMenu = GameObject.Find("PauseMenu");
+        _pause = GameObject.Find("Pause");
+    }
 
     private void Start()
     {
         _mouseValue = 0;
         _main.fieldOfView = 60;
-        _pauseMenu = GameObject.Find("PauseMenu");
-        _pause = GameObject.Find("Pause");
 
-        
+        Cursor.lockState = CursorLockMode.Confined;
     }
 
     private void Update()
@@ -84,7 +87,6 @@ public class InteractionController : MonoBehaviour
             if (_mouseValue > 0.1)
             {
                 Release(_mouseValue);
-                _twinkleAudio.Play();
             }
 
             _mouseValue = 0;
@@ -111,11 +113,11 @@ public class InteractionController : MonoBehaviour
         {
             if (_current.transform.gameObject.layer == 7)
             {
+                _twinkleAudio.Play();
                 FlowerController[] temp = _current.transform.gameObject.GetComponentsInChildren<FlowerController>();
                 foreach (var flowerCont in temp)
                 {
                     flowerCont.Blow(gameObject.transform.rotation, speed);
-                    
                 }
             }
         }
