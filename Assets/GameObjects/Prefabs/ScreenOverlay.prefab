@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3378422295122759286}
   - component: {fileID: 7200128166004249647}
+  - component: {fileID: 903672191891650257}
   m_Layer: 0
   m_Name: ScreenOverlay
   m_TagString: Untagged
@@ -60,6 +61,18 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &903672191891650257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2519904709356627495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 932ad137c4c7971429439ce035e76e6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9054009886759764281
 GameObject:
   m_ObjectHideFlags: 0
