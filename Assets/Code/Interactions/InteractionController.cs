@@ -20,6 +20,9 @@ public class InteractionController : MonoBehaviour
     private RaycastHit _current;
     private GameObject _pauseMenu;
     private GameObject _pause;
+    [SerializeField] private AudioSource _blowingAudio;
+    [SerializeField] private AudioSource _twinkleAudio;
+    private Boolean _soundPlayed = false;
 
 
     private void Start()
@@ -28,6 +31,8 @@ public class InteractionController : MonoBehaviour
         _main.fieldOfView = 60;
         _pauseMenu = GameObject.Find("PauseMenu");
         _pause = GameObject.Find("Pause");
+
+        
     }
 
     private void Update()
@@ -67,16 +72,28 @@ public class InteractionController : MonoBehaviour
                 _mouseValue -= Input.GetAxis("Mouse ScrollWheel");
                 _main.fieldOfView += (Input.GetAxis("Mouse ScrollWheel") * -5);
             }
+
+            if (_mouseValue > 3 && !_soundPlayed)
+            {
+                _blowingAudio.Play();
+                _soundPlayed = true;
+            }
         }
         else
         {
-            if (_mouseValue > 0.1) Release(_mouseValue);
+            if (_mouseValue > 0.1)
+            {
+                Release(_mouseValue);
+                _twinkleAudio.Play();
+            }
 
             _mouseValue = 0;
             if (_main.fieldOfView > 60f)
             {
                 _main.fieldOfView -= 1;
             }
+
+            _soundPlayed = false;
         }
 
         if (Input.GetKeyDown(KeyCode.Tab))
@@ -98,28 +115,13 @@ public class InteractionController : MonoBehaviour
                 foreach (var flowerCont in temp)
                 {
                     flowerCont.Blow(gameObject.transform.rotation, speed);
+                    
                 }
             }
         }
         catch
         {
             //lol what you gonna do about this
-        }
-    }
-
-    private void OnInteract()
-    {
-        try
-        {
-            if (_current.transform.gameObject.layer == 7)
-            {
-                _current.transform.gameObject.GetComponentInChildren<FlowerController>()
-                    .Blow(gameObject.transform.rotation, 0.13f);
-            }
-        }
-        catch
-        {
-            //i shouldnt do this but fuck this
         }
     }
 }
