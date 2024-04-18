@@ -10,6 +10,7 @@ public class MenuScript : MonoBehaviour
     {
         _controlls =GameObject.Find("Controlls");
         _startOverlay = GameObject.Find("StartOverlay");
+        
         _controlls.SetActive(false);
         
     }
@@ -22,10 +23,10 @@ public class MenuScript : MonoBehaviour
 
     public void PlayGame()
     {
-        Debug.Log("i start");
         SceneManager.LoadScene("MainScene");
     }
 
+    
     public void QuitGame()
     {
         Application.Quit();

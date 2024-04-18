@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using Image = UnityEngine.UI.Image;
 
@@ -17,12 +18,16 @@ public class InteractionController : MonoBehaviour
 
     [SerializeField] private Camera _main;
     private RaycastHit _current;
-    private float past;
+    private GameObject _pauseMenu;
+    private GameObject _pause;
+
 
     private void Start()
     {
         _mouseValue = 0;
         _main.fieldOfView = 60;
+        _pauseMenu = GameObject.Find("PauseMenu");
+        _pause = GameObject.Find("Pause");
     }
 
     private void Update()
@@ -47,7 +52,6 @@ public class InteractionController : MonoBehaviour
                 {
                     _current = hit;
                     _image.sprite = _interactUI;
-                    //hit.transform.gameObject.GetComponent<MeshRenderer>().material = _interactUI;
                 }
                 else
                 {
@@ -56,9 +60,6 @@ public class InteractionController : MonoBehaviour
             }
         }
 
-        //if (Input.GetKeyDown(KeyCode.E)) OnInteract();
-
-        // _main.fieldOfView += (Input.GetAxis("Mouse ScrollWheel") * -5 );
         if (Input.GetAxis("Mouse ScrollWheel") <= 0)
         {
             if (_mouseValue < 5)
@@ -70,14 +71,22 @@ public class InteractionController : MonoBehaviour
         else
         {
             if (_mouseValue > 0.1) Release(_mouseValue);
-            
+
             _mouseValue = 0;
             if (_main.fieldOfView > 60f)
             {
                 _main.fieldOfView -= 1;
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            _pauseMenu.SetActive(!_pauseMenu.activeSelf);
+            _pause.SetActive(_pauseMenu.activeSelf);
+            Cursor.visible = _pauseMenu.activeSelf;
+        }
     }
+
 
     private void Release(float speed)
     {
@@ -86,10 +95,9 @@ public class InteractionController : MonoBehaviour
             if (_current.transform.gameObject.layer == 7)
             {
                 FlowerController[] temp = _current.transform.gameObject.GetComponentsInChildren<FlowerController>();
-                foreach (var FlowerCont in temp)
+                foreach (var flowerCont in temp)
                 {
-                    FlowerCont.Blow(gameObject.transform.rotation, speed);
-                    
+                    flowerCont.Blow(gameObject.transform.rotation, speed);
                 }
             }
         }

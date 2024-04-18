@@ -23,17 +23,19 @@ public class FPSController : MonoBehaviour
  
     
     CharacterController _characterController;
+    private GameObject _pauseMenu;
+
     void Start()
     {
         _characterController = GetComponent<CharacterController>();
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        
+        _pauseMenu = GameObject.Find("PauseMenu");
+
     }
  
     void Update()
     {
- 
+        canMove = _pauseMenu.activeSelf ? false : true;
+        
         #region Handles Movment
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
